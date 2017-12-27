@@ -15,6 +15,11 @@ public class PRUEBA_GIBHUB {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        int a =11;
+        int b = 12;
+        int c = a+b;
+        System.out.println(""+c);
+        
         // TODO code application logic here
     }
     
