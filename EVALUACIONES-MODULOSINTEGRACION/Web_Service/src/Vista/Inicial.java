@@ -5,17 +5,34 @@
  */
 package Vista;
 
+import java.io.InputStream;
+import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Logger;
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonReader;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Concepción
  */
 public class Inicial extends javax.swing.JFrame {
 
+    DefaultTableModel modelo;//se declara antes
+
     /**
      * Creates new form Inicial
      */
     public Inicial() {
         initComponents();
+        //se crea formato de la tabla, cabecera y datos
+        String cabecera[] = {"Fecha", "Valor"};
+        String datos[][] = {};
+        modelo = new DefaultTableModel(datos, cabecera);
+        jbindicador.setModel(modelo);
     }
 
     /**
@@ -27,13 +44,61 @@ public class Inicial extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        cbxindicadores = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jbindicador = new javax.swing.JTable();
+        btnlistar = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        nombre = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jmindicador = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jmver = new javax.swing.JMenuItem();
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        cbxindicadores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "uf", "ivp", "dolar", "dolar_intercambio", "euro", "ipc", "utm", "imacec", "libra_cobre", "tasa_desempleo", "bitcoin" }));
+
+        jLabel1.setText("Indicador Económico :");
+
+        jbindicador.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jbindicador);
+
+        btnlistar.setText("LISTAR");
+        btnlistar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnlistarMouseClicked(evt);
+            }
+        });
+
+        jLabel2.setText("Nombre :");
 
         jMenu1.setText("Archivo");
         jMenuBar1.add(jMenu1);
@@ -64,11 +129,42 @@ public class Inicial extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(116, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(110, 110, 110))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnlistar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(87, 87, 87))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addGap(44, 44, 44)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cbxindicadores, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(59, 59, 59)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbxindicadores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addComponent(btnlistar, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(85, 85, 85))
         );
 
         pack();
@@ -80,14 +176,50 @@ public class Inicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jmverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmverActionPerformed
-   VerIndicador i = VerIndicador.getVIndicador();
+        VerIndicador i = VerIndicador.getVIndicador();
         i.setVisible(true);     // TODO add your handling code here:
     }//GEN-LAST:event_jmverActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
+    private void btnlistarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnlistarMouseClicked
+        try {
+            /*se obtiene la URL donde esta el recurso*/
+            URL url = new URL("http://mindicador.cl/api/" + cbxindicadores.getSelectedItem());
+            System.out.println("Consumiendo JSON...");
+            InputStream entrada = url.openStream();
+            JsonReader reader = Json.createReader(entrada);
+            JsonObject objeto = reader.readObject();
+            nombre.setText(""+objeto.get("nombre"));
+            int cantidad = objeto.getJsonArray("serie").size();//se guarda en cantidad el valor del tamaño del arreglo
+            modelo.setRowCount(0);
+            SimpleDateFormat formato = new SimpleDateFormat("YYYY-MM-dd");
+            SimpleDateFormat nuevo = new SimpleDateFormat("dd/MM/yyyy");
+            Date date = null;
+            //recorrer arreglo
+            for (int i = 0; i < cantidad; i++) {
+                try {
+                    date = formato.parse(""+objeto.getJsonArray("serie").getJsonObject(i).get("fecha"));
+                } catch (Exception t) {
+                    System.out.println(t.getCause());
+                }
+                modelo.addRow(new Object[] 
+                {nuevo.format(date),objeto.getJsonArray("serie").getJsonObject(i).get("valor")
+            });
+
+            }
+
+        }catch (Exception ex){
+             System.out.println("Error al agregar " + ex.getMessage());
+        }
+            //Logger.getLogger(JotaSON.class.getName()).log(level.SEVERE,null
+            
+    
+    
+    }//GEN-LAST:event_btnlistarMouseClicked
+
+/**
+ * @param args the command line arguments
+ */
+public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -98,16 +230,28 @@ public class Inicial extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                }
+                
+
+}
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Inicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Inicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Inicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Inicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Inicial.class
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        
+
+} catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Inicial.class
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        
+
+} catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Inicial.class
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        
+
+} catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Inicial.class
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -120,10 +264,19 @@ public class Inicial extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnlistar;
+    private javax.swing.JComboBox<String> cbxindicadores;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jbindicador;
     private javax.swing.JMenu jmindicador;
     private javax.swing.JMenuItem jmver;
+    private javax.swing.JTextField nombre;
     // End of variables declaration//GEN-END:variables
 }
