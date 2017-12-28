@@ -1,0 +1,159 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Controlador;
+
+import Modelo.Empleados;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import sql.Conexion;
+
+/**
+ *
+ * @author daniela
+ */
+public class Registro {
+
+    public String agregar(Empleados em) {
+        try {
+            Connection conexion = Conexion.getConexion();
+            String consulta = "SELECT * FROM empleados WHERE codigo =?";
+            PreparedStatement qry = conexion.prepareStatement(consulta);
+            qry.setInt(1, em.getCodigo());
+            ResultSet r = qry.executeQuery();
+            if (r.next()) {
+                return "Código ya existe";
+            }
+            String query = "INSERT INTO empleados "
+                    + "(codigo, rut, nombre , apellido, celular, email, sueldo_bruto, est_civil, nom_dept)"
+                    + " VALUES (?,?,?,?,?,?,?,?,?)";
+            PreparedStatement ins = conexion.prepareStatement(query);
+            ins.setInt(1, em.getCodigo());
+            ins.setString(2, em.getRut());
+            ins.setString(3, em.getNombre());
+            ins.setString(4, em.getApellido());
+            ins.setInt(5, em.getCelular());
+            ins.setString(6, em.getEmail());
+            ins.setInt(7, em.getSueldo());
+            // si estado fuera un char transformacion a String seria ins.setString(8,""+em.getEstado());
+            ins.setString(8, em.getEstado());
+            ins.setString(9, em.getDepto());
+            ins.executeUpdate();
+            return "Empleado Ingresado a la Perfección";
+        } catch (Exception e) {
+            System.out.println("Error al agregar " + e.getMessage());
+        }
+        return "Houston, tenemos un problema.";
+    }
+
+    public Empleados buscar(int codigo) {
+        try {
+            Connection conexion = Conexion.getConexion();
+            String consulta = "SELECT * FROM empleados WHERE codigo =?";
+            PreparedStatement qry = conexion.prepareStatement(consulta);
+            qry.setInt(1, codigo);
+            ResultSet r = qry.executeQuery();
+            //este método no requiere constructor
+            if (r.next()) {
+                //crea objeto pelota
+                Empleados em = new Empleados();
+                em.setCodigo(r.getInt("codigo"));
+                em.setRut(r.getString("rut"));
+                em.setNombre(r.getString("nombre"));
+                em.setApellido(r.getString("apellido"));
+                em.setCelular(r.getInt("celular"));
+                em.setEmail(r.getString("email"));
+                em.setSueldo(r.getInt("sueldo_bruto"));
+                em.setEstado(r.getString("est_civil"));
+                em.setDepto(r.getString("nom_dept"));
+
+                return em;
+            } else {
+                return null;
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
+    public void eliminar(int codigo) {
+        try {
+            Connection conexion = Conexion.getConexion();
+            String consulta = "DELETE FROM empleados WHERE codigo =?";
+            PreparedStatement qry = conexion.prepareStatement(consulta);
+            qry.setInt(1, codigo);
+            qry.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e.getCause());
+        }
+    }
+
+    //falta arreglar
+    public String actualizar(Empleados em) {
+        try {
+            Connection conexion = Conexion.getConexion();
+
+            String query = "UPDATE empleados "
+                    + "set rut=?, nombre=?, apellido=?, celular=?, email=?, sueldo_bruto=?, est_civil=?, nom_dept=?"
+                    + " WHERE codigo = ?";
+            PreparedStatement ins = conexion.prepareStatement(query);
+            ins.setString(1, em.getRut());
+            ins.setString(2, em.getNombre());
+            ins.setString(3, em.getApellido());
+            ins.setInt(4, em.getCelular());
+            ins.setString(5, em.getEmail());
+            ins.setInt(6, em.getSueldo());
+            ins.setString(7, em.getEstado());
+            ins.setString(8, em.getDepto());
+            ins.setInt(9, em.getCodigo());
+            ins.executeUpdate();
+            return "Actualización a la Perfección";
+        } catch (Exception e) {
+            System.out.println("Error al agregar " + e.getMessage());
+        }
+        return "Houston, tenemos un problema.";
+    }
+
+    /*public void eliminar1(int precio) {
+        try {
+            Connection conexion = Conexion.getConexion();
+            String consulta = "DELETE FROM pelicula WHERE precio >2000?";
+            PreparedStatement qry = conexion.prepareStatement(consulta);
+            qry.setInt(2,precio);
+            qry.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e.getCause());
+        }
+    }*/
+    public String aumento(){
+        try{
+            Connection conexion = Conexion.getConexion();
+            String consulta = "SELECT * FROM empleados";
+            PreparedStatement qry = conexion.prepareStatement(consulta);
+            ResultSet r = qry.executeQuery();
+            while(r.next()){
+               Empleados p = new Empleados();
+               p.setCodigo(r.getInt("codigo"));
+               p.setSueldo(r.getInt("sueldo_bruto"));
+               double m = p.getSueldo() * 1.10;
+               p.setSueldo((int)m);
+               String query = "UPDATE empleados "
+                    + "SET sueldo_bruto=?"
+                    + " WHERE codigo=?";
+            PreparedStatement ins = conexion.prepareStatement(query);
+            ins.setInt(1, p.getSueldo());
+            ins.setInt(2, p.getCodigo());
+            ins.executeUpdate();
+               }
+                }catch(Exception e){
+             System.out.println("Error al modificar "+e.getMessage());
+        }
+        return "Realizado Perfectamente";    
+    
+    }
+}
