@@ -152,5 +152,49 @@ public class Registro {
                 
             
         }*/
+    //elimina peliculas cuyo valor es mayo a $2.000
+    public boolean eliminar1() {
+        try {
+            Connection conexion = Conexion.getConexion();
+            String consulta = "DELETE FROM empleados WHERE sueldo_bruto=120000";
+            PreparedStatement qry = conexion.prepareStatement(consulta);
+            qry.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            System.out.println(e.getCause());
+        }
+        return false;
+    }
+    //se crea un metodo llamado listar que devuelve como dato un arraylist
+    public ArrayList<Empleados> listar(){
+        //se crea un arraylist llamado dconformado por elementos de clase Empleados
+        ArrayList<Empleados> d = new ArrayList();
+        //se crea una variable de tipo Empleados que se inializa vacia
+        Empleados p =null;
+        try{
+            Connection conexion = Conexion.getConexion();
+            String consulta = "SELECT *FROM empleados WHERE sueldo_bruto>900000";
+            PreparedStatement qry = conexion.prepareStatement(consulta);
+            ResultSet r = qry.executeQuery();
+            while(r.next()){
+                //se crea un objeto p de elemento empleados
+                p = new Empleados();
+                p.setCodigo(r.getInt("codigo"));
+                p.setRut(r.getString("rut"));
+                p.setNombre(r.getString("nombre"));
+                p.setApellido(r.getString("apellido"));
+                p.setCelular(r.getInt("celular"));
+                p.setEmail(r.getString("email"));
+                p.setEstado(r.getString("est_civil"));
+                p.setSueldo(r.getInt("sueldo_bruto"));
+                p.setDepto(r.getString("nom_dept"));
+                d.add(p); //se implementa metodo add, para agregar el objeto empleados a arraylits d
+            }
+        }catch(Exception e){
+             System.out.println(e.getMessage());
+        }
+        return d;
+    
+    }
     }
 

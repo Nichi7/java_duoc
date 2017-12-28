@@ -54,6 +54,7 @@ public class Mostrar_redes extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(800, 300));
 
         jbredes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -66,6 +67,7 @@ public class Mostrar_redes extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jbredes.setPreferredSize(new java.awt.Dimension(600, 120));
         jScrollPane1.setViewportView(jbredes);
 
         btnmostrar2.setText("Mostrar");

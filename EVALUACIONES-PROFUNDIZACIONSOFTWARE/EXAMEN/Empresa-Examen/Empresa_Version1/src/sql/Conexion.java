@@ -20,7 +20,7 @@ public class Conexion {
     private Conexion() {
         try {
             String driverUrl = "jdbc:mysql://localhost:3306/empresa";
-            connection = DriverManager.getConnection(driverUrl, "root","");
+            connection = DriverManager.getConnection(driverUrl, "root","Daniela30/");
             System.out.println("CONECTADO A MYSQL");
         } catch (Exception e) {
             e.printStackTrace();

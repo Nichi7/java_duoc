@@ -94,6 +94,12 @@ public class Agregar extends javax.swing.JFrame {
             }
         });
 
+        txtnombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtnombreKeyReleased(evt);
+            }
+        });
+
         btnagregar.setText("Agregar");
         btnagregar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -121,6 +127,17 @@ public class Agregar extends javax.swing.JFrame {
         jLabel9.setText("INGRESO EMPLEADOS");
 
         jLabel10.setText("Apellido:");
+
+        txtapellido.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtapellidoMouseClicked(evt);
+            }
+        });
+        txtapellido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtapellidoKeyReleased(evt);
+            }
+        });
 
         jLabel11.setText("RUT     :");
 
@@ -317,6 +334,40 @@ public class Agregar extends javax.swing.JFrame {
 
     }
 
+    private void verifica1(javax.swing.JTextField t) {
+        String teclado = t.getText();
+        if (teclado.length() > 0) {
+            char tecla = teclado.charAt(teclado.length() - 1);
+            teclado = teclado.substring(0, teclado.length() - 1);
+            if (tecla == ' ') {
+                JOptionPane.showMessageDialog(this, "Un nombre no puede empezar por espacio");
+            } else if (!Character.isLetter(tecla)) {
+                t.setText(teclado);
+                JOptionPane.showMessageDialog(this, "El nombre solo acepta letras del alfabeto español");
+                return;
+            }
+
+        }
+
+    }
+
+    private void verifica2(javax.swing.JTextField t) {
+        String teclado = t.getText();
+        if (teclado.length() > 0) {
+            char tecla = teclado.charAt(teclado.length() - 1);
+            teclado = teclado.substring(0, teclado.length() - 1);
+            if (tecla == ' ') {
+                JOptionPane.showMessageDialog(this, "Un apellido no puede empezar por espacio");
+            } else if (!Character.isLetter(tecla)) {
+                t.setText(teclado);
+                JOptionPane.showMessageDialog(this, "El apellido solo acepta letras del alfabeto español");
+                return;
+            }
+
+        }
+
+    }
+
     private void vaciar() {
         txtcodigo.setText("");
         txtrut.setText("");
@@ -326,9 +377,10 @@ public class Agregar extends javax.swing.JFrame {
         txtsueldo.setText("");
         txtemail.setText("");
         cbxdepto.setSelectedIndex(0);
-        rbncasado.setSelected(false);
+        /*rbncasado.setSelected(false);
         rbnsoltero.setSelected(false);
-        rbnviudo.setSelected(false);
+        rbnviudo.setSelected(false);*/
+        buttonGroup1.clearSelection();
     }
 
     private void btnagregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnagregarActionPerformed
@@ -348,7 +400,7 @@ public class Agregar extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Faltan Datos por Ingresar");
             return;
         }
-        if ((Integer.parseInt(txtcodigo.getText()) < 0) || (Integer.parseInt(txtcodigo.getText()) >100 )) {
+        if ((Integer.parseInt(txtcodigo.getText()) < 0) || (Integer.parseInt(txtcodigo.getText()) > 100)) {
             JOptionPane.showMessageDialog(this, "El Código debe ser mayor a cero y menor o igual a 100");
             return;
         }
@@ -422,7 +474,7 @@ public class Agregar extends javax.swing.JFrame {
     }//GEN-LAST:event_btnlimpiarMouseClicked
 
     private void txtrutKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtrutKeyReleased
-        verifica(txtrut);   // TODO add your handling code here:
+           // TODO add your handling code here:
     }//GEN-LAST:event_txtrutKeyReleased
 
     private void txtrutKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtrutKeyTyped
@@ -440,6 +492,18 @@ public class Agregar extends javax.swing.JFrame {
     private void rbncasadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbncasadoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rbncasadoActionPerformed
+
+    private void txtnombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnombreKeyReleased
+        verifica1(txtnombre);        // TODO add your handling code here:
+    }//GEN-LAST:event_txtnombreKeyReleased
+
+    private void txtapellidoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtapellidoMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtapellidoMouseClicked
+
+    private void txtapellidoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtapellidoKeyReleased
+        verifica2(txtapellido);        // TODO add your handling code here:
+    }//GEN-LAST:event_txtapellidoKeyReleased
 
     /**
      * @param args the command line arguments

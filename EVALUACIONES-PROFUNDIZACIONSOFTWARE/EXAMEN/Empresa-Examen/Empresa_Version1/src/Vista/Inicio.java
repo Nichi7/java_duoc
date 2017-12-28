@@ -7,6 +7,7 @@ package Vista;
 
 import Controlador.Registro;
 import Modelo.Empleados;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -31,6 +32,7 @@ public class Inicio extends javax.swing.JFrame {
     private void initComponents() {
 
         btnaumento = new javax.swing.JButton();
+        btneliminar1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jmsalir = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -46,6 +48,13 @@ public class Inicio extends javax.swing.JFrame {
         btnaumento.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnaumentoMouseClicked(evt);
+            }
+        });
+
+        btneliminar1.setText("ELIMINAR (120.000)");
+        btneliminar1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btneliminar1MouseClicked(evt);
             }
         });
 
@@ -105,15 +114,19 @@ public class Inicio extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(48, 48, 48)
-                .addComponent(btnaumento)
-                .addContainerGap(223, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnaumento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btneliminar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(221, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(106, 106, 106)
                 .addComponent(btnaumento)
-                .addContainerGap(150, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
+                .addComponent(btneliminar1)
+                .addContainerGap(100, Short.MAX_VALUE))
         );
 
         pack();
@@ -150,6 +163,16 @@ public class Inicio extends javax.swing.JFrame {
         Empleados em = new Empleados();
         g.aumento();// TODO add your handling code here:
     }//GEN-LAST:event_btnaumentoMouseClicked
+
+    private void btneliminar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btneliminar1MouseClicked
+        Registro g = new Registro();
+        Empleados m = new Empleados();
+        if(g.eliminar1()){
+        JOptionPane.showMessageDialog(this, "Se han eliminado correctamente los empleados cuyo sueldo es $120.000");
+        }else {
+          JOptionPane.showMessageDialog(this, "No encuentra Empleados cuyo sueldo sea igual a $120.000");  
+        }
+    }//GEN-LAST:event_btneliminar1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -188,6 +211,7 @@ public class Inicio extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnaumento;
+    private javax.swing.JButton btneliminar1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jmagregar;

@@ -6,6 +6,7 @@
 package Vista;
 
 import Controlador.Registro;
+import Modelo.Empleados;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,6 +21,7 @@ import sql.Conexion;
 public class Mostrar extends javax.swing.JFrame {
 
     private static Mostrar t = null;
+    DefaultTableModel modelo;//se declara antes
 
     public static Mostrar getMostrar() {
         if (t == null) {
@@ -34,37 +36,11 @@ public class Mostrar extends javax.swing.JFrame {
     public Mostrar() {
         initComponents();
         //se crea formato de la tabla, cabecera y datos
-        String cabecera[] = {"Cód.", "Rut", "Nombre", "Apellido", "Cel","Email","Sueldo","E_Civil","Depto"};
+        String cabecera[] = {"Cód.", "Rut", "Nombre", "Apellido", "Cel", "Email", "Sueldo", "E_Civil", "Depto"};
         String datos[][] = {};
-        DefaultTableModel model;
-        model = new DefaultTableModel(datos, cabecera);
-        jtempleados.setModel(model);
-        //crea el método
-        /*try {
-            //mostrar datos
-            Connection conexion = Conexion.getConexion();
-            Statement smt = conexion.createStatement();
-            String query = "SELECT * FROM pelicula";
-            ResultSet rs = smt.executeQuery(query);
+        modelo = new DefaultTableModel(datos, cabecera);
+        jtempleados.setModel(modelo);
 
-     
-
-            while (rs.next()) {
-                //sacamos datos de grilla
-                int codigo = rs.getInt("codigo");
-                int precio = rs.getInt("precio");
-                int categoria = rs.getInt("categoria");
-                String formato4k = rs.getString("formato4k");
-                String nombre = rs.getString("nombre");
-
-                Object[] fila = new Object[]{codigo, precio, categoria, formato4k, nombre};
-                model.addRow(fila);
-
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }*/
     }
 
     /**
@@ -87,6 +63,7 @@ public class Mostrar extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(800, 500));
 
         jtempleados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -100,6 +77,7 @@ public class Mostrar extends javax.swing.JFrame {
             }
         ));
         jtempleados.setToolTipText("");
+        jtempleados.setPreferredSize(new java.awt.Dimension(600, 120));
         jScrollPane1.setViewportView(jtempleados);
 
         btnmostrar.setText("Mostrar");
@@ -183,41 +161,14 @@ public class Mostrar extends javax.swing.JFrame {
     }//GEN-LAST:event_btnmostrarActionPerformed
 
     private void btnmostrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnmostrarMouseClicked
-        String cabecera[] = {"Cód.", "Rut", "Nombre", "Apellido", "Cel","Email","Sueldo","E_Civil","Depto"};
-        String datos[][] = {};
-        DefaultTableModel model;
-        model = new DefaultTableModel(datos, cabecera);
-        jtempleados.setModel(model);
-        //crea el método
-        try {
-            //mostrar datos
-            Connection conexion = Conexion.getConexion();
-            Statement smt = conexion.createStatement();
-            String query = "SELECT * FROM empleados";
-            ResultSet rs = smt.executeQuery(query);
-
-            /*DefaultTableModel model = (DefaultTableModel) tbsemilla.getModel();*/ //representa el formato de la tabla no la tabla en si 
-            while (rs.next()) {
-                //sacamos datos de grilla
-                int cod = rs.getInt("codigo");
-                String rut = rs.getString("rut");
-                String nom = rs.getString("nombre");
-                String apellido = rs.getString("apellido");
-                int cel = rs.getInt("celular");
-                String mail = rs.getString("email");
-                int sueldo = rs.getInt("sueldo_bruto");
-                String e_civil = rs.getString("est_civil");
-                String depto = rs.getString("nom_dept");
-                //condicion que selecciona solo pelicula de categoria romance
-                
-                    Object[] fila = new Object[]{cod, rut, nom, apellido, cel,mail,sueldo,e_civil,depto};
-                    model.addRow(fila);
-                
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }    // TODO add your handling code here:
+        Registro r = new Registro();
+        Object[] datos;
+        modelo.setRowCount(0);
+        //se recorre arraylist d llamando al metodo listar de la clase registro
+        for (Empleados f : r.listar()) {
+            datos = new Object[]{f.getCodigo(),f.getRut(),f.getNombre(), f.getApellido(),f.getCelular(),f.getEmail(), f.getSueldo(),f.getEstado(),f.getDepto()};
+            modelo.addRow(datos);//agregan a la jtable los datos contenidos en el objeto oBJECT
+        }
     }//GEN-LAST:event_btnmostrarMouseClicked
 
     /**
