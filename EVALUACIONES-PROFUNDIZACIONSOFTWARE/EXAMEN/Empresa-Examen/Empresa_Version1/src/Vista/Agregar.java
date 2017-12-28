@@ -7,6 +7,7 @@ package Vista;
 
 import Controlador.Registro;
 import Modelo.Empleados;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -386,7 +387,22 @@ public class Agregar extends javax.swing.JFrame {
     private void btnagregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnagregarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnagregarActionPerformed
-
+    private void vaciar1() {
+        //crea un arraylist llamado objetos
+        ArrayList<Object> objetos = new ArrayList();
+        //se les agrega los elementos ingresados en la consola 
+        objetos.add(txtcodigo);
+        objetos.add(txtnombre);
+        objetos.add(txtrut);
+        objetos.add(txtapellido);
+        objetos.add(txtcelular);
+        objetos.add(txtemail);
+        objetos.add(buttonGroup1);
+        objetos.add(cbxdepto);
+        objetos.add(txtsueldo);
+        Registro r = new Registro();
+        r.vaciar(objetos);
+    }
     private void btnagregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnagregarMouseClicked
         if (txtnombre.getText().isEmpty()
                 || txtrut.getText().isEmpty()
@@ -452,6 +468,7 @@ public class Agregar extends javax.swing.JFrame {
 
         Registro g = new Registro();
         JOptionPane.showMessageDialog(this, g.agregar(p));
+        vaciar1();
 
     }//GEN-LAST:event_btnagregarMouseClicked
 
@@ -474,7 +491,7 @@ public class Agregar extends javax.swing.JFrame {
     }//GEN-LAST:event_btnlimpiarMouseClicked
 
     private void txtrutKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtrutKeyReleased
-           // TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_txtrutKeyReleased
 
     private void txtrutKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtrutKeyTyped

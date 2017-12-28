@@ -7,6 +7,7 @@ package Vista;
 
 import Controlador.Registro;
 import Modelo.Empleados;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -138,6 +139,7 @@ public class Buscar extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup1.add(rbncasado2);
         rbncasado2.setText("Casado");
         rbncasado2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -145,14 +147,21 @@ public class Buscar extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup1.add(rbnsoltero2);
         rbnsoltero2.setText("Soltero");
 
+        txtcelular2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtcelular2ActionPerformed(evt);
+            }
+        });
         txtcelular2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtcelular2KeyReleased(evt);
             }
         });
 
+        buttonGroup1.add(rbnviudo2);
         rbnviudo2.setText("Viudo");
 
         jLabel14.setText("Departamento");
@@ -286,7 +295,22 @@ public class Buscar extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+private void vaciar1() {
+        //crea un arraylist llamado objetos
+        ArrayList<Object> objetos = new ArrayList();
+        //se les agrega los elementos ingresados en la consola 
+        objetos.add(txtcodigo2);
+        objetos.add(txtnombre2);
+        objetos.add(txtrut2);
+        objetos.add(txtapellido2);
+        objetos.add(txtcelular2);
+        objetos.add(txtemail2);
+        objetos.add(buttonGroup1);
+        objetos.add(cbxdepto2);
+        objetos.add(txtsueldo2);
+        Registro r = new Registro();
+        r.vaciar(objetos);
+    }
     private void btnbuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnbuscarMouseClicked
         if (txtcodigo2.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Falta Ingresar Còdigo para la Busqueda");
@@ -331,8 +355,8 @@ public class Buscar extends javax.swing.JFrame {
             btnactualizar.setEnabled(true);
             btneliminar.setEnabled(true);
         }
-
         
+
     }//GEN-LAST:event_btnbuscarMouseClicked
 
     private void btnbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarActionPerformed
@@ -438,7 +462,8 @@ public class Buscar extends javax.swing.JFrame {
         }
         p.setCodigo(Integer.parseInt(txtcodigo2.getText()));
         Registro g = new Registro();
-        JOptionPane.showMessageDialog(this, g.actualizar(p));        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, g.actualizar(p));        
+        vaciar1();
     }//GEN-LAST:event_btnactualizarMouseClicked
 
     private void btneliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btneliminarMouseClicked
@@ -451,8 +476,13 @@ public class Buscar extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Empleado eliminado Correctamente");
 
         btnactualizar.setEnabled(false);
-        btneliminar.setEnabled(false);        // TODO add your handling code here:
+        btneliminar.setEnabled(false);        
+        vaciar1();
     }//GEN-LAST:event_btneliminarMouseClicked
+
+    private void txtcelular2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcelular2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtcelular2ActionPerformed
     private void vaciar() {
         txtcodigo2.setText("");
         txtrut2.setText("");

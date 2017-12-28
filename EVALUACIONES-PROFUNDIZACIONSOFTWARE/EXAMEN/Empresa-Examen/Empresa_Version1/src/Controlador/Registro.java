@@ -10,7 +10,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import javax.swing.JComboBox;
+import javax.swing.JTextField;
 import sql.Conexion;
+import javax.swing.JRadioButton;
+import javax.swing.ButtonGroup;
 
 /**
  *
@@ -173,7 +177,8 @@ public class Registro {
         Empleados p =null;
         try{
             Connection conexion = Conexion.getConexion();
-            String consulta = "SELECT *FROM empleados WHERE sueldo_bruto>900000";
+            //se pueden hacer diferentes tipos de consulta a la base de datos para mostrar en jtable
+            String consulta = "SELECT *FROM empleados WHERE nom_dept ='Finanzas'";
             PreparedStatement qry = conexion.prepareStatement(consulta);
             ResultSet r = qry.executeQuery();
             while(r.next()){
@@ -194,6 +199,23 @@ public class Registro {
              System.out.println(e.getMessage());
         }
         return d;
+    
+    }
+    //se crea un método publico que no retorna algo,que tiene como argumentos que se le debe ingresar un arraylist de nombre objetos
+    public void vaciar(ArrayList<Object> objetos){
+        //se recorre el arraylist conformado por elementos tipo object
+        for(Object o:objetos){
+            if(o instanceof JTextField==true)
+                ((JTextField)o).setText("");
+            
+            if(o instanceof JComboBox==true)
+                ((JComboBox)o).setSelectedIndex(0);
+            
+            /*if(o instanceof JRadioButton==true)
+            ((JRadioButton)o).setSelected(false);*/
+            if(o instanceof ButtonGroup==true)
+                ((ButtonGroup)o).clearSelection();
+        }
     
     }
     }
