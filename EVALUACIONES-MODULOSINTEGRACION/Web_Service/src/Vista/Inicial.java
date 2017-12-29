@@ -183,26 +183,27 @@ public class Inicial extends javax.swing.JFrame {
     private void btnlistarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnlistarMouseClicked
         try {
             /*se obtiene la URL donde esta el recurso*/
-            URL url = new URL("http://mindicador.cl/api/" + cbxindicadores.getSelectedItem());
+            URL url = new URL("http://mindicador.cl/api/" + cbxindicadores.getSelectedItem().toString());
             System.out.println("Consumiendo JSON...");
             InputStream entrada = url.openStream();
             JsonReader reader = Json.createReader(entrada);
             JsonObject objeto = reader.readObject();
-            nombre.setText(""+objeto.get("nombre"));
+            nombre.setText(objeto.get("nombre").toString());
             int cantidad = objeto.getJsonArray("serie").size();//se guarda en cantidad el valor del tamaño del arreglo
             modelo.setRowCount(0);
-            SimpleDateFormat formato = new SimpleDateFormat("YYYY-MM-dd");
+            //no era obligacion darle un nuevo formato a la fecha
+            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
             SimpleDateFormat nuevo = new SimpleDateFormat("dd/MM/yyyy");
             Date date = null;
             //recorrer arreglo
             for (int i = 0; i < cantidad; i++) {
                 try {
-                    date = formato.parse(""+objeto.getJsonArray("serie").getJsonObject(i).get("fecha"));
+                    date = formato.parse(""+objeto.getJsonArray("serie").getJsonObject(i).get("fecha").toString().substring(1,11));
                 } catch (Exception t) {
                     System.out.println(t.getCause());
                 }
                 modelo.addRow(new Object[] 
-                {nuevo.format(date),objeto.getJsonArray("serie").getJsonObject(i).get("valor")
+                {nuevo.format(date),objeto.getJsonArray("serie").getJsonObject(i).get("valor").toString()
             });
 
             }
