@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/Concepción/Downloads/AgueroPablo_taller2/src/SERVICIOS/DB/ConexionMySql.java</file>
+            <file>file:/C:/Users/Concepción/Downloads/AgueroPablo_taller2/src/MODELO/DAO/ChocolatesDAO.java</file>
+            <file>file:/C:/Users/Concepción/Downloads/AgueroPablo_taller2/src/VISTA/MENU/CRUD/Chocolate/ControladorCRUDChocolate.java</file>
+            <file>file:/C:/Users/Concepción/Downloads/AgueroPablo_taller2/src/MODELO/DAO/ChocolateDAO.java</file>
+            <file>file:/C:/Users/Concepción/Downloads/AgueroPablo_taller2/src/MODELO/NEGOCIO/Chocolates.java</file>
+            <file>file:/C:/Users/Concepción/Downloads/AgueroPablo_taller2/src/VISTA/MENU/CRUD/Chocolate/CRUDVistaChocolate.java</file>
+            <file>file:/C:/Users/Concepción/Downloads/AgueroPablo_taller2/src/VISTA/MENU/Menu.java</file>
+            <file>file:/C:/Users/Concepción/Downloads/AgueroPablo_taller2/src/SERVICIOS/DB/DDLChocolate.sql</file>
+            <file>file:/C:/Users/Concepción/Downloads/AgueroPablo_taller2/src/MODELO/NEGOCIO/Chocolate.java</file>
+            <file>file:/C:/Users/Concepción/Downloads/AgueroPablo_taller2/src/SERVICIOS/DB/Conexion.java</file>
+            <file>file:/C:/Users/Concepción/Downloads/AgueroPablo_taller2/src/VISTA/MENU/CRUD/Chocolate/ModelJTableChocolate.java</file>
+            <file>file:/C:/Users/Concepción/Downloads/AgueroPablo_taller2/src/MODELO/DAO/PojoDAO.java</file>
+            <file>file:/C:/Users/Concepción/Downloads/AgueroPablo_taller2/src/SERVICIOS/Servicios.java</file>
+        </group>
+    </open-files>
+</project-private>
