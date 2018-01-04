@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -267,8 +268,9 @@ public class Indicador extends javax.swing.JFrame {
 
         } catch (Exception ex) {
             System.out.println("Error al agregar " + ex.getMessage());
+            JOptionPane.showMessageDialog(this, "Error al agregar " + ex.getMessage());
         }
-        //Logger.getLogger(JotaSON.class.getName()).log(level.SEVERE,null
+        
  //a_abs = Math.abs(a); 
 
     }//GEN-LAST:event_btnlistarMouseClicked
