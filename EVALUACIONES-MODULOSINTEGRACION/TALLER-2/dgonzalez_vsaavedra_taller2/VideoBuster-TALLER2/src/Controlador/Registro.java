@@ -94,7 +94,7 @@ public class Registro {
             System.out.println(e.getCause());
         }
     }
-    //falta arreglar
+    //Actualiza los datos de una pelicula a traves del codigo
     public String actualizar(Pelicula p){
         try {
             Connection conexion = Conexion.getConexion();
@@ -115,6 +115,7 @@ public class Registro {
         }
         return "Houston, tenemos un problema.";
     }
+    //Inserta una nueva catetegoria a la tabla categoria 
     public String agregar1(Categoria c){
         try {
             Connection conexion = Conexion.getConexion();
@@ -137,6 +138,8 @@ public class Registro {
         }
         return "Houston, tenemos un problema.";
     }
+    //Consulta una pelicula a traves del nombre de esta
+    
      public Pelicula buscar1(String nombre){
         try{
             Connection conexion = Conexion.getConexion();
@@ -162,10 +165,13 @@ public class Registro {
         }
         return null;    
     }
-     public Pelicula buscar2(String descripcion){
+     //Consulta una pelicula a partir de la descripción de la categoria de la pelicula
+    public Pelicula buscar2(String descripcion){
         try{
             Connection conexion = Conexion.getConexion();
-            String consulta = "SELECT * FROM pelicula WHERE descripcion=?";
+            String consulta = "SELECT codigo, nombre, formato4k, precio, categoria, id, descripcion"
+                    + " FROM pelicula INNER JOIN categoria ON pelicula.categoria=categoria.id"
+                    + " WHERE descripcion=?";
             PreparedStatement qry = conexion.prepareStatement(consulta);
             qry.setString(1,descripcion);
             ResultSet r = qry.executeQuery();
@@ -178,13 +184,33 @@ public class Registro {
                 p.setFormato4k(r.getString("formato4k"));
                 p.setPrecio(r.getInt("precio"));
                 p.setCategoria(r.getInt("categoria"));
-                
+
                 return p;
             }else
                 return null;
         }catch(Exception e){
              System.out.println(e.getMessage());
         }
-        return null;    
+        return null;
     }
+    //Actualiza una categoria nueva a partir del codigo
+    public String actualizar2(Pelicula p){
+        try {
+            Connection conexion = Conexion.getConexion();
+
+            String query = "UPDATE pelicula"
+                    + " set categoria=?"
+                    + " WHERE codigo = ?";
+            PreparedStatement ins = conexion.prepareStatement(query);
+            ins.setInt(1, p.getCategoria());
+            ins.setInt(2, p.getCodigo());
+            ins.executeUpdate();
+            return "Actualización a la Perfección";
+        } catch (Exception e) {
+            System.out.println("Error al agregar " + e.getMessage());
+        }
+        return "Houston, tenemos un problema.";
+    }
+
+
 }
