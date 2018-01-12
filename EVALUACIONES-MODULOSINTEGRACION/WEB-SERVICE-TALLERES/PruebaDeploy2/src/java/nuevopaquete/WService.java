@@ -12,11 +12,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /**
  *
@@ -27,15 +22,21 @@ public class WService {
     @GET
     @Path("/regiones")
     @Produces("application/json")
+    /*crea metodo que retorna un objeto de la clase Arraylist con elementos de la clase Region en formato json*/
     public ArrayList<Region> listaRegiones(){
+        /*se crea arraylist con el nombre de regiones*/
         ArrayList<Region> regiones = new ArrayList();
         try{
+            /*Se obtiene el objeto JSON a partir de una URL*/
             URL url = new URL("http://servelelecciones.cl/data/elecciones_presidente/filters/regiones/all.json");
             InputStream entrada = url.openStream();
             JsonReader reader = Json.createReader(entrada);
             JsonArray objeto = reader.readArray();
+            /*se recorre arraylist de regiones del api*/
             for(int i=0;i<objeto.size();i++)
+                /*se agregan regiones al arraylis creado llamado regiones*/
                 regiones.add(
+                        /*se crea objeto region*/
                         new Region(objeto.getJsonObject(i).getInt("c"),
                                 objeto.getJsonObject(i).getString("d")
                         )

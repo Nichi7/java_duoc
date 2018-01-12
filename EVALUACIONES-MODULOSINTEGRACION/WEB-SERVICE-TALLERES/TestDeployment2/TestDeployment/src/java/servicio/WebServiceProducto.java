@@ -22,6 +22,7 @@ public class WebServiceProducto {
     @GET
     @Path("/get")
     @Produces("application/json")
+    /*se obtiene un objeto JSON a partir de datos ingresados manualmente*/
     public Producto getProductoJSON(){
         Producto producto = new Producto();//crea objeto producto
         producto.setNombre("iPhone");
