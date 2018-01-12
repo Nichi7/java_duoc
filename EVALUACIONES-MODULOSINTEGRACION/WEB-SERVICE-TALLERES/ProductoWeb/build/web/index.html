@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Película</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <style>
+            label{
+                margin-right: 15px;
+            }
+
+        </style>
+    </head>
+    <body>
+         <h1 id="titulo">VideoBuster</h1>
+        <label>Categoria</label><select id="categoria">
+        </select>
+        
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+        <script>
+            $.get("webresources/video/categoria").then(function (data) {
+                var cadena = "";
+                for (var i in data)
+                    cadena += '<option value="' + data[i]["codigo"] + '">' + data[i]["descrip"] + "</option>";
+                $("#categoria").html(cadena);
+                $("#categoria").change();
+
+            });
+       
+       </script>
+    </body>
+</html>
