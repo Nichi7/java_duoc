@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Administración de Usuarios</title>
+        <meta http-equiv="Content-Type" content="text/html;  charset=UTF-8">
+    </head>
+    <body>
+        <form method="get" id="formulario1" action="AgregarUsuario">
+            <table border="1">
+                <tr>
+                    <td>Usuario</td>
+                    <td><input type="text" id="txtusuario" name="txtusuario"
+                               maxlength="12" size="12"> </td>
+                </tr>
+                <tr>
+                    <td>Clave</td>
+                    <td><input type="password" id="txtclave" name="txtclave"
+                               maxlength ="8" size="8"></td>
+                </tr>
+                <tr>
+                    <td>Nombre</td>
+                    <td><input type="text" id="txtnombre" name="txtnombre"
+                               maxlength ="50" size="50"></td>
+                </tr>
+                
+                <tr>
+                    <td>Tipo de Usuario</td>
+                    <td>
+                        <select id="cmbtipo" name="cmbtipo">
+                          <option value="a">administrador</option>   
+                          <option value="b">usuario</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" id="enviar" value="Enviar"/>
+                        &nbsp; &nbsp; &nbsp; 
+                        <input type="reset" id="Limpiar" value="Limpiar"/>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

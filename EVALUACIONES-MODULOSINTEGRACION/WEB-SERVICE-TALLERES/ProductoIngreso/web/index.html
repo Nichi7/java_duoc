@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Película</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <style>
+            label{
+                margin-right: 15px;
+            }
+
+        </style>
+    </head>
+    <body>
+         <h1 id="titulo">VideoBuster</h1>
+        <label>Categoria</label><select id="categoria">
+        </select>
+        
+        <table id="tablapeliculas" class="bordetabla">
+                 <tr>
+                  
+                  <td><strong>Codigo</strong></td>
+                  <td><strong>Precio</strong></td>
+                  <td><strong>Categoria</strong></td>
+                  <td><strong>Formato4k</strong></td>
+                  <td><strong>Nombre</strong></td>
+                 </tr>
+              </table>
+        
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+        <script>
+            $.get("webresources/video/categoria").then(function (data) {
+                var cadena = "";
+                console.log(data);
+                for (var i in data)
+                    cadena += '<option value="' + data[i]["codigo"] + '">' + data[i]["descrip"] + "</option>";
+                $("#categoria").html(cadena);
+                $("#categoria").change();
+
+            });
+           $.get("webresources/video/pelicula").then(function (data){
+               var html='';
+			  // si la consulta ajax devuelve datos
+             
+                  for (var i in data){
+                        html += '<tr>'
+                            html += '<td>'+data[i]["codigo"]+'</td>'
+                            html += '<td>'+data[i]["precio"]+'</td>'
+                            html += '<td>'+data[i]["categoria"]+'</td>'
+                            html += '<td>'+data[i]["formato4k"]+'</td>'
+                            html += '<td>'+data[i]["nombre"]+'</td>'
+							
+                        html += '</tr>';
+				    }
+               
+			  // si no hay datos mostramos mensaje de no encontraron registros
+            if(html == '') html = '<tr><td colspan="6">No se encontraron registros..</td></tr>'
+                // añadimos  a nuestra tabla todos los datos encontrados mediante la funcion html
+            $("#tablapeliculas tbody").html(html);  
+         });   
+       </script>
+    </body>
+</html>
