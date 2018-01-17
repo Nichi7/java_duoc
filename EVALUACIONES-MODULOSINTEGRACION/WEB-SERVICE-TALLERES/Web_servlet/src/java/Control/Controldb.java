@@ -74,6 +74,7 @@ public class Controldb {
                 oUsuario.getClave() + "','" + 
                 oUsuario.getNombre() + "','"+ 
                 oUsuario.getTipo() +"');";
+       
         try 
             {
                 /*se crea el objeto statement , statement es una clase que invoca o genera un COMANDO SQL para 

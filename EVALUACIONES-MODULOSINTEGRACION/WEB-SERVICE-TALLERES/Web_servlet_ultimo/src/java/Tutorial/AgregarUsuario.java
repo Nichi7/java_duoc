@@ -22,11 +22,19 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "AgregarUsuario", urlPatterns = {"/AgregarUsuario"})
 public class AgregarUsuario extends HttpServlet {
 
-   
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-            PrintWriter out = response.getWriter();
+        try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
@@ -37,43 +45,39 @@ public class AgregarUsuario extends HttpServlet {
             //conectase, agregar y cerrar conexion
             try //genera un objeto de la clase control
             {
-                
-            
                 Controldb oControldb = new Controldb();
                 //genera un objeto de la clase usuario
-                Usuario oUsuario = new Usuario(
+                Usuario oUsuario = new Usuario();
                 //se pasan los paarametros al objeto usuario
-                request.getParameter("txtusuario").toString(),
-                request.getParameter("txtclave").toString(),
-                request.getParameter("txtnombre").toString(),
-                request.getParameter("cmbtipo").toString().charAt(0)
-                );
-                if (oControldb.conectar("registro", "root", "Daniela30/")) 
+                request.getParameter("txtusuario").toString();
+                request.getParameter("txtclave").toString();
+                request.getParameter("txtnombre").toString();
+                request.getParameter("txtcmdtipo").toString().charAt(0);
+
+                if (oControldb.conectar("localhost", "basedatos", "usuario", "clave")) 
                 {
-                    if (oControldb.registroUsuarios(oUsuario)) 
+                    if (oControldb.registroUsuario(oUsuario)) 
                     {
                         out.println("<h3>Operación realizada correctamente</h3>");
                     } 
                     else 
                     {
-                        out.println("<h3>Error: " + oControldb.getLastError() + "</h3>");
+                        out.println("Error: " + oControldb.getLastError() + "");
                     }
                     if (!oControldb.desconectar()) 
                     {
-                        out.println("<h3>Error: " + oControldb.getLastError() + "</h3>");
-                    }
-                } 
-                else 
-                {    
-                    out.println("<h3>Error: " + oControldb.getLastError() + "</h3>");
+                        out.println("Error: " + oControldb.getLastError() + "");
+                    } 
+                else out.println("Error: " + oControldb.getLastError() + "");
+                {
+                   out.println("Error: " + oControldb.getLastError() + ""); 
                 }
-             out.println("</body>");
-             out.println("</html>");
-             }
-             finally
-            {
-                out.close();
-            } 
+                out.println("</body>");
+                out.println("</html>");
+                }
+                finally
+                }
+            }
         }
 
         // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
