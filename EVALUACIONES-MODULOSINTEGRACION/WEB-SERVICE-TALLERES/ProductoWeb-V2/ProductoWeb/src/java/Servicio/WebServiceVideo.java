@@ -58,7 +58,7 @@ public class WebServiceVideo {
     public ArrayList<Categoria> listaCategoria(){
         ArrayList<Categoria> categ = new ArrayList();
         try{
-             Connection conexion = Conexion.getConexion();
+            Connection conexion = Conexion.getConexion();
             String consulta = "SELECT id, descripcion FROM categoria";
             PreparedStatement qry = conexion.prepareStatement(consulta);
             ResultSet r = qry.executeQuery();
