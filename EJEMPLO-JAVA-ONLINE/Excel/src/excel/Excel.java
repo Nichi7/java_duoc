@@ -35,10 +35,10 @@ public class Excel {
 
     public static void main(String[] args) {
 
-        //crearExcel();
+        crearExcel();
         //leer();
         //cargar();
-        modificar();
+        //modificar();
 
     }
     // metodo para crear un libro en excel
@@ -49,7 +49,7 @@ public class Excel {
         //llamar a clase
         //Workbook book = new HSSFWorkbook();informo que voy a crear archivo en excel version antigua .xls
         Workbook book = new XSSFWorkbook(); //nueva version
-        org.apache.poi.ss.usermodel.Sheet sheet = book.createSheet("Hola Java"); //crea una nueva pestaña
+        org.apache.poi.ss.usermodel.Sheet sheet = book.createSheet("Productos"); //crea una nueva pestaña
         //guardar archivo
 
         //crear fila primera y sus celdas
@@ -71,7 +71,7 @@ public class Excel {
 
         try {
             //FileOutputStream fileout = new FileOutputStream("Excel.xls");
-            FileOutputStream fileout = new FileOutputStream("Excel.xlsx");//se cambia extension
+            FileOutputStream fileout = new FileOutputStream("Excel2.xlsx");//se cambia extension
             book.write(fileout);//escribir archivo
             fileout.close();
             //este archivo se crea en el archivo de nuestro proyecto
